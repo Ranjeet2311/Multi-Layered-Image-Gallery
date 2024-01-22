@@ -1,0 +1,29 @@
+$screen-xs: 375px;
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+
+// *---Media Query Breaking points---*
+
+@mixin xs {
+  @media (max-width: #{$screen-xs}) {
+    @content;
+  }
+}
+@mixin sm {
+  @media (max-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$screen-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$screen-lg}) {
+    @content;
+  }
+}
