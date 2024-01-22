@@ -2,7 +2,7 @@
 
 Project displays images in grid format, with max 5 images on large screen and reduces the number of image in a row when screen size gets small, hence makes is responsive. All images are covered by an overlay and overlay is toggled on hover.
 
-This project repo contains all components such as FE & BE. FE includes HTML, SCSS (later converted into css and consumed) and javascript/Jquery. Technology used in backend is Node + expressJS, backend builds the project from public folder`
+This project repo contains all components such as FE & BE. FE includes HTML, SCSS (later converted into css and consumed) and javascript/Jquery. Technology used in backend is Node + expressJS, `backend builds the project from public folder`
 
 ## Api endpoints:
 
