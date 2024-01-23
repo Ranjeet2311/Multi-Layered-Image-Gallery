@@ -1,56 +1,44 @@
 $(document).ready(function () {
   const imageLists = [];
-  const newImageList = [];
-
   $.ajax({
-    url: 'http://localhost:3000/api', //fetch images
+    url: `http://localhost:3000/api/images`, //fetch images Ids
     success: function (result) {
-      imageLists.push(result);
-
-      $.ajax({
-        url: 'http://localhost:3000/api/images', //fetch images Ids
-        success: function (result) {
-          const imageIdList = result;
-
-          for (let i = 0; i < imageIdList.length; i++) {
-            imageLists.filter((imgObject) => {
-              //retieving same images, after compaing/checking the same Id to keep the same image data flow
-              if (imgObject[i].id == imageIdList[i]) {
-                newImageList.push(imgObject[i]);
-              }
-            });
-          }
-          setTimeout(function () {
-            loadData(newImageList); //loading images after page loads, 1s delay
-          }, 1000);
-        },
-        error: function (error) {
-          console.log(`Error in image Id ajax`);
-        },
-      });
+      const imageIdList = result;
+      for (let i = 0; i < imageIdList.length; i++) {
+        const element = imageIdList[i];
+        $.ajax({
+          url: `http://localhost:3000/api/image/${element}`, //fetch images
+          async: false,
+          success: function (result) {
+            const image = result;
+            imageLists.push(image);
+            console.log(`2nd AJAX call running`);
+          },
+          error: function (error) {
+            console.log(`Error in image list ajax`);
+          },
+        });
+      }
+      loadData(imageLists);
     },
     error: function (error) {
-      console.log(`Error in image ajax`);
+      console.log(`Error in image Id ajax`);
     },
   });
 
-  // looping over the json data and injecting
-  function loadData(data) {
-    for (var i = 0; i < data.length; i++) {
-      let details = data[i].details;
-      $('#container').append(`
-      <div class="container">
-        <img src=" ${details.imageSrc}" alt="">
-        <div class="caption" style="width: 100%;">
-          <p>${details.title} details</p>
-        </div>
-        <div id="overlays" class="overlay" style="background: ${details.overlayColor}50"></div>
-      </div>`);
-    }
+  function loadData(imageLists) {
+    imageLists.map((item) => {
+      return $('#container').append(`
+     <div class="container">
+         <img src=" ${item.imageSrc}" alt="">
+         <div class="caption" style="width: 100%;">
+           <p>${item.title} details</p>
+         </div>
+         <div id="overlays" class="overlay" style="background: ${item.overlayColor}50"></div>
+    </div>`);
+    });
   }
-
   // Togglin image overlay
-
   $('body')
     .on('mouseenter', '#overlays', function (event) {
       $(this).toggleClass('transparent');

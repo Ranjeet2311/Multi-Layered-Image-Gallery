@@ -38,9 +38,9 @@ app.get('/api/image/:imageId', (req, res) => {
 });
 
 // Images endpoint
-app.get('/api', (req, res) => {
-  res.send(imgJson);
-});
+// app.get('/api', (req, res) => {
+//   res.send(imgJson);
+// });
 
 // running the server
 
