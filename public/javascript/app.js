@@ -32,7 +32,7 @@ $(document).ready(function () {
      <div class="container">
          <img src=" ${item.imageSrc}" alt="">
          <div class="caption" style="width: 100%;">
-           <p>${item.title} details</p>
+           <p>${item.title}</p>
          </div>
          <div id="overlays" class="overlay" style="background: ${item.overlayColor}50"></div>
     </div>`);
